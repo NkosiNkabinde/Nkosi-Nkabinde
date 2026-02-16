@@ -155,6 +155,15 @@ function App() {
               <p><a href="https://github.com/youruser/sentrypipe" target="_blank" rel="noreferrer">GitHub</a> · <a href="https://demo.example.com/sentrypipe" target="_blank" rel="noreferrer">Demo</a></p>
             </div>
 
+            
+            <div className="project-card">
+              <img src="/lms.png" alt="WanderLearn LMS" />
+              <h3>Newcastle Crime Watch</h3>
+              <p>This Crime Watch app is a dedicated safety platform for the Newcastle Township (KZN) community. It enables residents to report incidents via geolocated forms, track real-time crime feeds, and receive urgent safety alerts. With quick-dial emergency contacts and localized prevention tips, it empowers citizens to collaborate with SAPS for a safer neighborhood. </p>
+              <p>Tech: Next.js 14, TypeScript, TailwindCSS, Radix, TipTap, Prisma, PostgreSQL, AWS S3, Better Auth</p>
+              <p><a href="https://github.com/youruser/wanderlearn-lms" target="_blank" rel="noreferrer">GitHub</a> · <a href="https://demo.example.com/wanderlearn" target="_blank" rel="noreferrer">Demo</a></p>
+            </div>
+
             <div className="project-card">
               <img src="/lms.png" alt="WanderLearn LMS" />
               <h3>WanderLearn LMS</h3>

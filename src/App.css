@@ -206,6 +206,65 @@ h2 {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.summary {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 60px;
+  margin: 40px 0;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.summary p {
+  max-width: 960px;
+  margin: 0 auto 18px;
+  opacity: 0.95;
+}
+
+.skills-table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 40px;
+}
+
+.skills-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+}
+
+.skills-table th,
+.skills-table td {
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.skills-table th {
+  background: rgba(255, 255, 255, 0.08);
+  text-align: left;
+  font-weight: 600;
+}
+
+.skills-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.work-tasks {
+  margin: 18px 0 0 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.work-tasks li {
+  margin-bottom: 10px;
+}
+
+.education-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
 .about-details {
   display: flex;
   justify-content: space-around;

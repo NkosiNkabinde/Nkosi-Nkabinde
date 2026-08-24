@@ -8,6 +8,8 @@
   min-height: 100vh;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  position: relative;
+  isolation: isolate;
 }
 
 /* Navbar */
@@ -33,17 +35,31 @@
   color: #FFD700; /* Gold */
   font-weight: 700;
   letter-spacing: 0.5px;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
 }
 .nav-links {
   display: flex;
   gap: 22px;
 }
-.nav-links a {
+.nav-links a,
+.nav-links button {
   color: #FFD700; /* Gold */
   opacity: 0.9;
   transition: color 0.2s ease, opacity 0.2s ease;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
 }
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links button:hover,
+.nav-links button[aria-selected='true'] {
   color: #FFFFFF; /* White on hover */
   opacity: 1;
 }
@@ -87,14 +103,15 @@
 .theme-toggle:hover { color: #FFFFFF; }
 
 .hero {
-  background: radial-gradient(1200px 800px at 10% -10%, rgba(0, 0, 0, 0.8) 0%, rgba(0,0,0,0) 60%),
-              radial-gradient(1000px 700px at 90% 10%, rgba(0, 0, 0, 0.8) 0%, rgba(0,0,0,0) 55%),
-              linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 60%, #1a1a1a 100%);
+  background: radial-gradient(1200px 800px at 10% -10%, rgba(0, 0, 0, 0.72) 0%, rgba(0,0,0,0) 60%),
+              radial-gradient(1000px 700px at 90% 10%, rgba(0, 0, 0, 0.66) 0%, rgba(0,0,0,0) 55%),
+              linear-gradient(135deg, rgba(26, 26, 26, 0.78) 0%, rgba(42, 42, 42, 0.72) 60%, rgba(26, 26, 26, 0.78) 100%);
   color: #FFD700; /* Gold */
   padding: 160px 20px 120px;
   position: relative;
-  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  overflow: visible;
 }
+
 .hero-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -103,6 +120,8 @@
   grid-template-columns: 1.2fr 1fr;
   align-items: center;
   gap: 40px;
+  position: relative;
+  z-index: 1;
 }
 .hero .hero-content { text-align: left; }
 .hero .subtitle { opacity: 0.9; margin: 8px 0 18px; font-size: 1.05rem; }
@@ -114,7 +133,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(600px 400px at 50% 0%, rgba(255,255,255,0.06), transparent 70%);
+  background: radial-gradient(600px 400px at 50% 0%, rgba(255,255,255,0.04), transparent 70%);
   z-index: 0;
 }
 
@@ -145,6 +164,9 @@
   box-shadow: 0 10px 40px rgba(127, 90, 240, 0.35);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   animation: fadeInUp 1.2s ease-out 0.2s both;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
 }
 
 .cta-button:hover {
@@ -158,28 +180,21 @@
   right: 60px;
   width: 260px;
   height: 260px;
-  background: linear-gradient(45deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 28px 80px rgba(102, 126, 234, 0.35);
-  border: 4px solid rgba(255, 255, 255, 0.16);
-  overflow: hidden;
   z-index: 1;
-}
-.profile-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
 }
 
 section {
   padding: 100px 0;
   width: 100%;
   position: relative;
+  z-index: 1;
 }
+
+section.tab-panel:not(.active-tab) { display: none; }
+section.tab-panel.active-tab { min-height: calc(100vh - 84px); }
 
 .section-content {
   max-width: 1200px;
@@ -289,6 +304,18 @@ h2 {
   border-radius: 16px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 1px solid rgba(255,215,0,0.08);
+}
+
+.education,
+.experience,
+.skills,
+.projects,
+.achievements,
+.contact,
+.education-item,
+.experience-item,
+.project-card {
+  backdrop-filter: none;
 }
 
 .education-item:hover, .experience-item:hover {
@@ -412,6 +439,20 @@ h2 {
   margin-bottom: 15px;
 }
 
+.achievement-mark {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 15px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  color: #0b0b16;
+  background: linear-gradient(135deg, #ffd700, #5ae2ff);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
 .contact {
   background: rgba(255, 215, 0, 0.04); /* Gold tint */
   backdrop-filter: blur(10px);
@@ -473,6 +514,8 @@ footer {
   text-align: center;
   padding: 40px 20px;
   border-top: 1px solid rgba(255, 215, 0, 0.08);
+  position: relative;
+  z-index: 1;
 }
 
 /* Light theme overrides */
@@ -486,9 +529,16 @@ footer {
   border-bottom-color: rgba(0,0,0,0.06);
 }
 .app.light .nav-links a { color: #2c3472; }
+.app.light .nav-links button { color: #2c3472; }
 .app.light .cta-nav { border-color: rgba(0,0,0,0.08); }
 .app.light .cta-nav.strong { color: #0e1330; box-shadow: 0 8px 24px rgba(127,90,240,0.25); }
-.app.light .hero { color: #0e1330; }
+.app.light .hero {
+  color: #0e1330;
+  background:
+    radial-gradient(900px 600px at 8% 0%, rgba(255, 215, 0, 0.14), transparent 60%),
+    radial-gradient(800px 560px at 92% 10%, rgba(90, 226, 255, 0.16), transparent 58%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(238, 241, 255, 0.72));
+}
 .app.light .project-card,
 .app.light .about,
 .app.light .skills,
@@ -496,9 +546,43 @@ footer {
 .app.light .education,
 .app.light .experience,
 .app.light .contact {
-  background: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.34);
   border-color: rgba(0,0,0,0.06);
   box-shadow: 0 12px 40px rgba(13, 27, 78, 0.08);
+}
+.app.light .project-card { color: #0e1330; }
+.app.light .project-card a { color: #3947a5; }
+.app.light .education-item,
+.app.light .experience-item,
+.app.light .achievement {
+  background: rgba(255, 255, 255, 0.38);
+  border-color: rgba(14, 19, 48, 0.1);
+}
+.app.light .contact input,
+.app.light .contact textarea {
+  color: #0e1330;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(14, 19, 48, 0.14);
+}
+.app.light .contact input::placeholder,
+.app.light .contact textarea::placeholder { color: rgba(14, 19, 48, 0.62); }
+.app.light .floating-logos__item {
+  filter: saturate(1.25) contrast(1.18) drop-shadow(0 5px 14px rgba(20, 33, 84, 0.4));
+  background: rgba(20, 33, 84, 0.16);
+  border-color: rgba(20, 33, 84, 0.28);
+}
+
+/* Keep the moving logos sharp in every tab. This must follow all card styles. */
+.education,
+.experience,
+.skills,
+.projects,
+.achievements,
+.contact,
+.education-item,
+.experience-item,
+.project-card {
+  backdrop-filter: none;
 }
 .app.light footer { background: rgba(255,255,255,0.8); color: #0e1330; border-top-color: rgba(0,0,0,0.06); }
 
@@ -534,13 +618,22 @@ footer a {
     transition: transform 0.3s ease;
   }
   .mobile-menu.open { transform: translateY(0); }
-  .mobile-menu a { color: #e8e9ee; }
+  .mobile-menu a,
+  .mobile-menu button {
+    color: #e8e9ee;
+    appearance: none;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+    text-align: left;
+  }
 }
 
 @media (max-width: 768px) {
   .hero {
     padding: 130px 20px 80px;
-    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
   }
 
   .hero-inner {

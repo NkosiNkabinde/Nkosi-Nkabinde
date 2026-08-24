@@ -1,0 +1,137 @@
+.talking-photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.talking-photo__frame {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  overflow: visible;
+  transition: filter 0.3s ease;
+}
+
+.talking-photo__frame.is-speaking {
+  animation: talking-photo-bob 0.5s ease-in-out infinite;
+}
+
+.talking-photo__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
+  transition: box-shadow 0.3s ease;
+}
+
+.talking-photo__frame.is-speaking .talking-photo__img {
+  box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.35), 0 28px 80px rgba(0, 0, 0, 0.4);
+}
+
+/* the "mouth" is a simple dark ellipse laid over the real mouth position,
+   scaled vertically in real time to fake an open/close talking motion */
+.talking-photo__mouth {
+  position: absolute;
+  background: radial-gradient(ellipse at center, #160907 0 45%, #4a201b 72%, #7e443b 100%);
+  border-radius: 45% 45% 52% 52%;
+  box-shadow: inset 0 1px 1px rgba(255, 180, 160, 0.32), 0 1px 2px rgba(0, 0, 0, 0.3);
+  transform-origin: center;
+  transition: transform 0.08s ease-out, opacity 0.15s ease;
+  pointer-events: none;
+}
+
+/* small circular play/pause control, bottom-right of the photo */
+.talking-photo__playbtn {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  background: linear-gradient(90deg, #ffd700 0%, #d4af37 100%);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 2;
+}
+
+.talking-photo__playbtn:hover:not(:disabled) {
+  transform: scale(1.08);
+  box-shadow: 0 10px 26px rgba(255, 215, 0, 0.4);
+}
+
+.talking-photo__playbtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.talking-photo__icon {
+  display: block;
+}
+
+.talking-photo__icon--play {
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 13px solid #000;
+  margin-left: 3px; /* optical centering */
+}
+
+.talking-photo__icon--pause {
+  display: flex;
+  gap: 4px;
+}
+
+.talking-photo__icon--pause span {
+  width: 5px;
+  height: 16px;
+  background: #000;
+  border-radius: 1px;
+  display: block;
+}
+
+.talking-photo__calibrate {
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: #ffd700;
+  background: rgba(255, 215, 0, 0.06);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.talking-photo__calibrate label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.talking-photo__calibrate-hint {
+  margin: 4px 0 0;
+  opacity: 0.7;
+  font-size: 0.72rem;
+}
+
+@keyframes talking-photo-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .talking-photo__frame.is-speaking {
+    animation: none;
+  }
+}

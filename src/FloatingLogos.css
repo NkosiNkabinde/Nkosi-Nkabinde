@@ -1,0 +1,52 @@
+.floating-logos {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.floating-logos__item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: contain;
+  box-sizing: border-box;
+  padding: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  filter: saturate(1.15) contrast(1.1) drop-shadow(0 5px 14px rgba(0, 0, 0, 0.6));
+  animation-name: logo-float;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes logo-float {
+  0% {
+    transform: translate(var(--start-x), var(--start-y)) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: var(--peak-opacity, 0.25);
+  }
+  50% {
+    transform: translate(var(--mid-x), var(--mid-y)) rotate(calc(var(--spin, 0deg) * 0.5));
+  }
+  88% {
+    opacity: var(--peak-opacity, 0.25);
+  }
+  100% {
+    transform: translate(var(--end-x), var(--end-y)) rotate(var(--spin, 0deg));
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-logos__item {
+    animation: none;
+    opacity: 0;
+  }
+}
